@@ -17,7 +17,7 @@ jobs:
          java-version: 21
 
       - name: Capture baselines
-        run: ./mvn clean test -Desco.mode=capture
+        run: ./mvnw clean test -Desco.mode=capture
 
       - name: Upload baselines
         uses: actions/upload-artifact@v4

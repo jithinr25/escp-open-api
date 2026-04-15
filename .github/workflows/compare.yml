@@ -1,0 +1,37 @@
+name: Compare Baseline
+
+on: 
+  workflow_dispatch:
+    inputs:
+      run_id:
+        description: "Capture workflow run ID"
+        required: true
+jobs:
+  compare:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Download baselines from specific run
+        uses: actions/download-artifact@v4
+        with:
+          name: baselines
+          run-id: ${{ inputs.run_id }}
+          path: src/test/resources/baselines
+
+      - name: Verify baselines exist (sanity check)
+        run: ls -R src/test/resources/baselines
+
+      - name: Set up Java 21
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 21
+
+      - name: Make mvnw executable
+        run: chmod +x mvnw
+
+      - name: Run tests
+        run: ./mvnw clean test

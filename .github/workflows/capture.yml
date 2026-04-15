@@ -16,6 +16,9 @@ jobs:
          distribution: temurin
          java-version: 21
 
+      - name: Make mvnw executable
+        run: chmod +x mvnw
+
       - name: Capture baselines
         run: ./mvnw clean test -Desco.mode=capture
 

@@ -46,9 +46,10 @@ jobs:
       - name: Run tests
         run: ./mvnw clean test
 
-      - name: Upload test results
+      - name: Publish test results
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: dorny/test-reporter@v1
         with:
-          name: junit-report
-          path: target/surefire-reports
+          name: junit-results
+          path: target/surefire-reports/*.xml
+          reporter: java-junit

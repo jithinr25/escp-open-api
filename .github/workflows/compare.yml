@@ -22,9 +22,6 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           path: src/test/resources/baselines
 
-      - name: Count baseline files
-        run: find src/test/resources/baselines -name "*json" | wc -1
-
       - name: Corrupt baseline (force failure)
         run: |
             file=$(find src/test/resources/baselines -name "*.json" | head -n 1)

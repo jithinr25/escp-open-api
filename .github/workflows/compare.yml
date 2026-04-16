@@ -22,6 +22,11 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           path: src/test/resources/baselines
 
+      - name: Corrupt baseline (force failure)
+        run: |
+            file=$(find src/test/resources/baselines -name "*.json" | head -n 1)
+            sed -i 's/"httpStatus": 200/"httpStatus": 500/' "$file"
+
       - name: Verify baselines exist (sanity check)
         run: ls -R src/test/resources/baselines
 

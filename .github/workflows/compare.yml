@@ -27,7 +27,7 @@ jobs:
             file=$(find src/test/resources/baselines -name "*.json" | head -n 1)
             echo "Modifying file: $file"
             cat "$file" | head -n 20
-            sed -i 's/"httpStatus": 200/"httpStatus": 500/' "$file"
+            sed -i 's/"httpStatus"[[:space:]]*:[[:space:]]*200/"httpStatus": 500/' "$file"
             echo "After modification:"
             cat "$file" | head -n 20
 

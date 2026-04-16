@@ -1,5 +1,10 @@
 name: Compare Baseline
 
+permissions:
+  checks: write
+  pull-requests: write
+  contents: read
+
 on: 
   workflow_dispatch:
     inputs:
